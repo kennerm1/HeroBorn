@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-
-    public float moveSpeed = 10f;
+    public GameBehavior gameManager;
+    public float GameBehavior.moveSpeed = 10f;
     public float rotateSpeed = 75f;
     public float jumpVelocity = 5f;
     public float distanceToGround = 0.1f;
@@ -20,6 +20,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
     }
@@ -31,7 +32,7 @@ public class PlayerBehavior : MonoBehaviour
             _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
         }
 
-        vInput = Input.GetAxis("Vertical") * moveSpeed;
+        vInput = Input.GetAxis("Vertical") * GameBehavior.moveSpeed;
         hInput = Input.GetAxis("Horizontal") * rotateSpeed;
 
         /*
